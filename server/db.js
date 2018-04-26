@@ -7,11 +7,7 @@ const pool = new Pool({
   port: 5433,
 })
 
-pool.connect(function(err, client, done){
-  client.query('SELECT * from books', [], (err, res) => {
-    if(err) throw err;
-  
-    console.log(res.rows);
-    client.end()
-  })
+pool.query('SELECT * from books', (err, res) => {
+  console.log(res.rows);
+  pool.end()
 })
