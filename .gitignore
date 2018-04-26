@@ -35,3 +35,4 @@ node_modules
 .node_repl_history
 
 client/bundle.js  
+secret.js

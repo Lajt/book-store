@@ -4,13 +4,14 @@ const app = express()
 const cors = require('cors')
 app.use(cors())
 app.set('view engine', 'ejs')
+app.use(express.static('client'))
 
-import serverRender from './render'
+// import serverRender from './render'
 import apiRouter from './apiRouter'
 
 app.get('/', (req, res) => {
   res.render('index', {
-    content: serverRender()
+    content: ''//serverRender()
   })
 })
 

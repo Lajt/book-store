@@ -1,9 +1,12 @@
 const { Pool, Client } = require('pg')
 
+import secret from '../secret'
+
 const pool = new Pool({
   user: 'postgres',
   host: 'localhost',
   database: 'books-dev',
+  password: secret,
   port: 5433,
 })
 
