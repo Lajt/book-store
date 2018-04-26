@@ -5,7 +5,11 @@ const BookList = (props) => {
   return(
     <div>
       {props.books.map((book, id) => {
-        return (<Book key={id} {...book} />)
+        return (
+          <Book key={id}
+          onClick={props.onBookClick}
+          {...book} />
+        )
       })}
     </div>
   )
