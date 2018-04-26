@@ -9,9 +9,10 @@
     <title>Document</title>
 </head>
 <body>
-    <h2 id = "root">
-        <%- content %>
-    </h2>
+    <div id="root"><%- markup -%></div>
+    <script>
+        window._initialData = <%- JSON.stringify(initialData) %>;
+    </script>
     <script src="/bundle.js"></script>
 </body>
 </html>

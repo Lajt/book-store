@@ -4,7 +4,7 @@ import axios from 'axios'
 
 class App extends React.Component {
   state = { 
-    books: []
+    books: this.props.initialData
   }
 
   componentDidMount() {
