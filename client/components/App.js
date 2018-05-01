@@ -25,11 +25,22 @@ class App extends React.Component {
         })
       })
   }
+
+  calcRatingForBook = (bookId) => {
+    const ratings = this.state.ratings[bookId]
+    if(!ratings || ratings.length === 0) return
+    console.log(ratings)
+    return ratings.reduce((acc, review) => {
+      return acc + review.rating
+    }, 0) / ratings.length
+  }
+
   render(){
     return(
       <div>
         <BookList 
         books={this.state.books}
+        calcRatingForBook={this.calcRatingForBook}
         onBookClick={this.fetchRatingForBook}/>
       </div>
     )

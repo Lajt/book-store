@@ -7,6 +7,7 @@ const BookList = (props) => {
       {props.books.map((book, id) => {
         return (
           <Book key={id}
+          rating={props.calcRatingForBook(book.id)}
           onClick={props.onBookClick}
           {...book} />
         )
