@@ -1,19 +1,15 @@
 import React from 'react'
 import BookList from './BookList'
 import axios from 'axios'
+import Book from './Book'
 
 class App extends React.Component {
   state = { 
     books: this.props.initialData,
-    ratings: {}
+    ratings: {},
+    currentBookId: null
   }
 
-  // componentDidMount() {
-  //   axios.get('http://localhost:8080/api/books/')
-  //     .then(resp => {
-  //       this.setState({books: resp.data})
-  //     })
-  // }
   fetchRatingForBook = (bookId) => {
     if(this.state.ratings[bookId]) return
     axios.get(`http://localhost:8080/api/books/${bookId}/ratings`)
@@ -34,15 +30,21 @@ class App extends React.Component {
       return acc + review.rating
     }, 0) / ratings.length
   }
-
+  showBookPage = (bookId) => {
+    history.pushState({
+      currentBookId: bookId
+    }, "", `/books/${bookId}`)
+    this.setState({currentBookId: bookId})
+  }
   render(){
     return(
-      <div>
+      this.state.currentBookId ? 
+        <Book {...this.state.books[this.state.currentBookId]}/> :
         <BookList 
-        books={this.state.books}
-        calcRatingForBook={this.calcRatingForBook}
-        onBookClick={this.fetchRatingForBook}/>
-      </div>
+          books={this.state.books}
+          showBookPage={this.showBookPage}
+          calcRatingForBook={this.calcRatingForBook}
+          onBookClick={this.fetchRatingForBook}/>
     )
   }
 }

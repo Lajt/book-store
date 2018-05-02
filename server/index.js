@@ -9,8 +9,9 @@ app.use(express.static('client'))
 import serverRender from './render'
 import apiRouter from './apiRouter'
 
-app.get('/', (req, res) => {
-  serverRender().then(renderData => {
+app.get(['/', '/books/:bookId'], (req, res) => {
+  //res.render('index', {markup: '', initialData: ''})
+  serverRender(req.params.bookId).then(renderData => {
     return (
       res.render('index', {
         markup: renderData.markup,
